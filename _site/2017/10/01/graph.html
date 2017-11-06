@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+　　<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+　　　　<title>Graph</title>
+<script src="http://127.0.0.1:35729/livereload.js"></script></head>
+<body>
+　　<h3 id="动态连通性问题dynamic-connectivity">动态连通性问题(Dynamic Connectivity)</h3>
+<ul>
+  <li>union-find算法
+    <ul>
+      <li>quick-find
+        <ul>
+          <li>初始时各点的连通分量各不相同；</li>
+          <li>每添加一条边，则检测两点是否属于同一个连通分量；
+            <ol>
+              <li>若属于，则不做处理，因为不影响连通性；</li>
+              <li>若不属于，则合并这两点所在的连通分量。</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>quick-union
+        <ul>
+          <li>每添加一条边，则检测两点所在树的根节点是否相同；
+            <ol>
+              <li>若相同，则不做处理；</li>
+              <li>若不相同，则某一根节点指向另一根节点</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>weighted-quick-union
+        <ul>
+          <li>记录每棵树的大小，每次合并时，总将小树合并到大树</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>最优算法
+    <ul>
+      <li>在weighted-quick-union的基础上，压缩路径，开销接近于常数</li>
+      <li>例如，自己想的办法，在find的root时候，将点s直接链到root上</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="这是一类无向图问题">这是一类无向图问题</h3>
+<p>深度优先搜索（DepthFirstSearch）</p>
+
+<p>广度优先搜索（BreadthFirstSearch）</p>
+
+<p>连通分量(Connected Components)<br />
+    用深度优先搜索实现//代码TODO<br />
+    用union-find算法实现//代码TODO</p>
+
+<p>检测环(Circle Detection)<br />
+    如果顶点v的邻接点w已经被标记，且不是v的父顶点u的话，那必然有另外一条路先于v标记了w，即既有经过v的路径s-&gt;w，又有不经过v的路径s-&gt;w，即构成了环 
+    //代码TODO</p>
+
+<p>双色问题
+    如果顶点v的邻接点w已经被染色，且与v同色，则不是一个双色图，即二分图。
+    //代码TODO</p>
+
+<p>符号图（Symbol Graphs）<br />
+    //代码TODO</p>
+
+<p>间隔的度数（Degrees Of Separation）<br />
+    //代码TODO</p>
+
+<h3 id="这是一类有向图问题">这是一类有向图问题</h3>
+<p>有向无环图（DAG）<br />
+    进行有向环检测确保的确无环;<br />
+    有向无环图才可以进行拓扑排序;</p>
+
+<p>有向环检测
+    若顶点v的邻接顶点w已经被标记，且还在调用栈里面，即既存在v-&gt;w边，也间接存在一条w-&gt;v边，这两者构成一个环，注意去无向的区别</p>
+
+<p>拓扑排序（topological sort）
+    就是有向图的逆后序<br />
+        优先级调度
+        无环有向图的最短路径问题
+        //代码TODO</p>
+
+<p>强连通性（Strong connectivity）<br />
+    Kosaraju算法</p>
+
+<p>Kosaraju算法（Kosaraju–Sharir algorithm）</p>
+<ol>
+  <li>计算一个图G的反向图的逆后序排列</li>
+  <li>按照前述顺序进行DFS</li>
+  <li>一个DFS中被访问到的点属于同一个强连通分量。</li>
+</ol>
+
+<p>顶点对的可达性（All-pairs reachability）
+    传递闭包（transitive closure）</p>
+
+<h3 id="这是一类加权无向图问题">这是一类加权无向图问题</h3>
+<p>最小生成树（Minimum Spanning trees）<br />
+    Prim算法<br />
+    Kruskal算法</p>
+
+<p>Prim算法
+    从一个点开始，将权重最小的横切边添加进树，直到树有V-1个边<br />
+    //延时实现TODO
+    在树生长的过程中，点v可能有多条边与树相连，我们只要知道最短那条边就好了
+    //非延时实现TODO</p>
+
+<p>Kruskal算法
+    从最小边开始，从不会构成环的相邻边中挑选最小边添加进树，直到树有V-1个边<br />
+    //TODO</p>
+
+<h3 id="这是一类加权有向图问题-最短路径">这是一类加权有向图问题 最短路径</h3>
+
+<p>边的松弛（Edge relaxation）  
+顶点的松弛（Vertex relaxation）<br />
+Dijkstra算法<br />
+    将距离s最近的非树顶点放松并加入树中，如此这般，直到所有的顶点都在树中或者所有的非树顶点离s无限远。<br />
+    //TODO<br />
+若该图是无环的，则
+    按照拓扑顺序放松顶点，就能解决最短路径问题<br />
+    //TODO</p>
+
+<p>最长路径问题
+    //TODO</p>
+
+<p>关键路径（Critical Path）<br />
+    优先级限制下的并行任务调度<br />
+    //TODO<br />
+    相对最后期限下的并行任务调度<br />
+    //TODO</p>
+
+<p>若不存在负权重环，则<br />
+Bellman-Ford算法<br />
+    以任意顺序放松有向图的所有边，重复V轮<br />
+    //TODO</p>
+
+<p>基于队列的Bellman-Ford算法<br />
+    基于上轮放松过的顶点本轮才可能放松的认识，优化算法<br />
+    //TODO</p>
+
+<p>负权重环的检测<br />
+    套汇<br />
+    //TODO</p>
+
+<p>当且仅当一副含有V个顶点的图G满足下列5个条件之一时，它就是一棵树：<br />
+    G有V-1条边且不含有环；<br />
+    G有V-1条边且是连通的；<br />
+    G是连通的，但删除任意一条边都会使它不再连通；<br />
+    G是无环图，但添加任意一条边都会产生一个环；<br />
+    G中的任意一对顶点之间仅存在一条简单路径。</p>
+
+<p>二分图（bipartite graph）是一种能够将所有顶点分为两个集合的图，每条边依附（incident）的两个顶点分属两个不同的集合。</p>
+
+<p>生成树（spanning tree）是一棵含有图所有顶点的树，生成树森林是所有连通分支  （connected components）的生成树的集合。</p>
+
+<p>解决任务调度类应用通常需要以下3步：<br />
+    指明任务和优先级条件<br />
+    不断检测并去除有向图中的所有环，以确保存在可行方案
+    使用拓扑排序解决调度问题</p>
+
+<p>深度优先搜索（DepthFirstSearch）是这样一种算法：<br />
+    在访问一个顶点时，<br />
+        将它标记为已访问；<br />
+        递归地访问它的所有没有被标记过的相邻（adjacent）顶点。<br />
+        //代码TODO</p>
+
+<p>他可以被用来：<br />
+    无向图<br />
+        寻找单源路径（single-source paths）//代码TODO <br />
+        寻找图中所有的连通分量//代码TODO<br />
+        检测环//代码TODO<br />
+        双色问题（Two-colorability）//代码TODO<br />
+    有向图<br />
+        单源可达性（Single-source reachability）//代码TODO<br />
+        单点有向路径（DepthFirstDirectedPaths）//代码TODO   <br />
+        有向环检测（Directed cycle detection）//代码TODO
+        拓扑排序//代码TODO
+        Kosaraju算法//代码TODO</p>
+
+<p>广度优先搜索（BreadthFirstSearch）是这样一种算法：<br />
+    先将起点加入队列，然后重复下列步骤直到队列为空，<br />
+        取队列的下一个顶点v并标记它；<br />
+        将与v相邻的所有未被标记过的顶点加入队列。<br />
+        //代码TODO</p>
+
+<p>他可以被用来：<br />
+    无向图<br />
+        寻找单源最短路径（single-source shortest paths）//代码TODO<br />
+        确定间隔的度数（Degrees of separation）//代码TODO，用符号图来实现<br />
+    有向图<br />
+        单点最短有向路径（BreadthFirstDirectedPaths）//代码TODO</p>
+
+
+</body>
+</html>

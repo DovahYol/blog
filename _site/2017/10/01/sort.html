@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+　　<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+　　　　<title>Sort</title>
+<script src="http://127.0.0.1:35729/livereload.js"></script></head>
+<body>
+　　<h3 id="选择排序selection-sort">选择排序（Selection Sort）</h3>
+<ul>
+  <li>找出当前数组中的最小元素，将其与第一个元素交换；</li>
+  <li>对剩下的数组执行相同的操作；</li>
+  <li>直到需要进行操作的数组里只剩下一个元素</li>
+</ul>
+
+<h3 id="插入排序insertion-sort">插入排序（Insertion Sort）</h3>
+<ul>
+  <li>将当前元素与前一个元素比较，若小于则交换，直到当前元素不小于前一个元素</li>
+  <li>特点：比较适宜处理逆序比较少的数列</li>
+</ul>
+
+<h3 id="希尔排序insertion-sort">希尔排序（Insertion Sort）</h3>
+<ul>
+  <li>确定一个增量序列，其最大值为h(比如Knuth增量序列)</li>
+  <li>对h有序数组进行插入排序；</li>
+  <li>h减1；若h小于0则停止；</li>
+  <li>重复第一个步骤；</li>
+</ul>
+
+<h3 id="归并排序merge-sort">归并排序（Merge Sort）</h3>
+<ul>
+  <li>先将两个子数组排序，在归并这两个子数组成一个大的数组</li>
+  <li>空间复杂度并非最优</li>
+  <li>标准的归并//TODO</li>
+  <li>自底向上(Bottom-up)的归并//TODO
+    <ul>
+      <li>特点：不使用递归，比较适合链表</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="快速排序quick-sort">快速排序（Quick Sort）</h3>
+<ul>
+  <li>确定一个点的位置，对该点左右两子序列进行相同的操作，直到全部有序</li>
+  <li>特点：原地排序，不需要额外的存储空间</li>
+  <li>排过序的序列是最坏情况，n的平方</li>
+</ul>
+
+<h3 id="三向切分快速排序3-way-partition-quick-sort">三向切分快速排序（3-way partition Quick Sort）</h3>
+<ul>
+  <li>特点：适用于重复元素比较多的序列</li>
+</ul>
+
+<h3 id="二叉堆3-way-partition-quick-sort">二叉堆（3-way partition Quick Sort）</h3>
+<ul>
+  <li>完全二叉树：叶节点只能出现在最下层和次下层，并且最下面一层的结点都集中在该层最左边的若干位置的二叉树</li>
+  <li>堆的有序化（reheapifying）</li>
+  <li>若储存在数列中的完全二叉树从1开始，则对于当前节点k而言，其父节点（若有）为k/2，其左儿子（若有）为k<em>2，其右儿子（若有）为k</em>2+1</li>
+  <li>若储存在数列中的完全二叉树从0开始，则对于当前节点k而言，其父节点（若有）为(k-1)/2，其左儿子（若有）为k<em>2+1，其右儿子（若有）为k</em>2+2</li>
+</ul>
+
+<h3 id="堆排序heap-sort">堆排序（Heap Sort）</h3>
+<ul>
+  <li>堆的构造：(复杂度O(n)</li>
+  <li>方法一：用swim从左到右扫描，保证已扫描过的数组是一个完全二叉树</li>
+  <li>方法二：从右向左sink每一个元素，因为一个元素是一个堆，所以可以跳过一般元素，从N/2(最后一个元素的父节点)开始向左扫描，这样比方法一更快</li>
+  <li>堆的排序：（复杂度O(nlgn)）
+    <ul>
+      <li>交换位置1与位置N的元素，缩小堆至N-1,继续执行以上步骤，直至堆的大小为1</li>
+      <li>总共的复杂度为O(nlgn)</li>
+    </ul>
+  </li>
+  <li>特点：
+    <ul>
+      <li>无论是堆的构建还是排序都只使用了sink，而没有使用swim；也有一种sink， then swim的堆排序方法</li>
+      <li>所知的唯一的能同时最优的利用空间和时间的方法</li>
+      <li>适用于内存比较紧张的情形，比如说嵌入式系统</li>
+      <li>现代系统很少利用它，因为它很少与邻近的元素比较，缓存命中的次数极低</li>
+      <li>若想得到升序，则建立大顶堆，若想得到降序，则建立小顶堆。</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="各种排序的比较">各种排序的比较</h3>
+<ul>
+  <li>特点：只有插入排序和归并排序是稳定的，最广泛使用的是快速排序</li>
+  <li><img src="imgs/sortcompare.png" alt="排序比较" /></li>
+</ul>
+
+
+</body>
+</html>
