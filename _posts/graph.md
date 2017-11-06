@@ -1,0 +1,172 @@
+### 动态连通性问题(Dynamic Connectivity)
+* union-find算法
+    * quick-find
+        * 初始时各点的连通分量各不相同；
+        * 每添加一条边，则检测两点是否属于同一个连通分量；
+            1. 若属于，则不做处理，因为不影响连通性；
+            2. 若不属于，则合并这两点所在的连通分量。
+    * quick-union
+        * 每添加一条边，则检测两点所在树的根节点是否相同；
+            1. 若相同，则不做处理；
+            2. 若不相同，则某一根节点指向另一根节点
+    * weighted-quick-union
+        * 记录每棵树的大小，每次合并时，总将小树合并到大树
+* 最优算法
+    * 在weighted-quick-union的基础上，压缩路径，开销接近于常数
+    * 例如，自己想的办法，在find的root时候，将点s直接链到root上
+  
+### 这是一类无向图问题  
+深度优先搜索（DepthFirstSearch）  
+
+广度优先搜索（BreadthFirstSearch）
+    
+连通分量(Connected Components)  
+    用深度优先搜索实现//代码TODO  
+    用union-find算法实现//代码TODO  
+
+检测环(Circle Detection)  
+    如果顶点v的邻接点w已经被标记，且不是v的父顶点u的话，那必然有另外一条路先于v标记了w，即既有经过v的路径s->w，又有不经过v的路径s->w，即构成了环 
+    //代码TODO  
+
+双色问题
+    如果顶点v的邻接点w已经被染色，且与v同色，则不是一个双色图，即二分图。
+    //代码TODO
+
+符号图（Symbol Graphs）  
+    //代码TODO  
+
+间隔的度数（Degrees Of Separation）  
+    //代码TODO  
+
+### 这是一类有向图问题  
+有向无环图（DAG）  
+    进行有向环检测确保的确无环;  
+    有向无环图才可以进行拓扑排序;  
+
+有向环检测
+    若顶点v的邻接顶点w已经被标记，且还在调用栈里面，即既存在v->w边，也间接存在一条w->v边，这两者构成一个环，注意去无向的区别  
+      
+拓扑排序（topological sort）
+    就是有向图的逆后序  
+        优先级调度
+        无环有向图的最短路径问题
+        //代码TODO  
+
+强连通性（Strong connectivity）  
+    Kosaraju算法  
+
+Kosaraju算法（Kosaraju–Sharir algorithm）  
+1. 计算一个图G的反向图的逆后序排列
+2. 按照前述顺序进行DFS
+3. 一个DFS中被访问到的点属于同一个强连通分量。
+
+顶点对的可达性（All-pairs reachability）
+    传递闭包（transitive closure）
+
+### 这是一类加权无向图问题
+最小生成树（Minimum Spanning trees）  
+    Prim算法  
+    Kruskal算法
+
+Prim算法
+    从一个点开始，将权重最小的横切边添加进树，直到树有V-1个边  
+    //延时实现TODO
+    在树生长的过程中，点v可能有多条边与树相连，我们只要知道最短那条边就好了
+    //非延时实现TODO
+
+Kruskal算法
+    从最小边开始，从不会构成环的相邻边中挑选最小边添加进树，直到树有V-1个边  
+    //TODO
+
+### 这是一类加权有向图问题 最短路径
+
+边的松弛（Edge relaxation）  
+顶点的松弛（Vertex relaxation）  
+Dijkstra算法  
+    将距离s最近的非树顶点放松并加入树中，如此这般，直到所有的顶点都在树中或者所有的非树顶点离s无限远。  
+    //TODO  
+若该图是无环的，则
+    按照拓扑顺序放松顶点，就能解决最短路径问题  
+    //TODO  
+
+最长路径问题
+    //TODO
+
+关键路径（Critical Path）  
+    优先级限制下的并行任务调度  
+    //TODO  
+    相对最后期限下的并行任务调度  
+    //TODO  
+
+若不存在负权重环，则  
+Bellman-Ford算法  
+    以任意顺序放松有向图的所有边，重复V轮  
+    //TODO  
+
+基于队列的Bellman-Ford算法  
+    基于上轮放松过的顶点本轮才可能放松的认识，优化算法  
+    //TODO
+    
+负权重环的检测  
+    套汇  
+    //TODO  
+
+当且仅当一副含有V个顶点的图G满足下列5个条件之一时，它就是一棵树：  
+    G有V-1条边且不含有环；  
+    G有V-1条边且是连通的；  
+    G是连通的，但删除任意一条边都会使它不再连通；  
+    G是无环图，但添加任意一条边都会产生一个环；  
+    G中的任意一对顶点之间仅存在一条简单路径。  
+  
+二分图（bipartite graph）是一种能够将所有顶点分为两个集合的图，每条边依附（incident）的两个顶点分属两个不同的集合。  
+
+生成树（spanning tree）是一棵含有图所有顶点的树，生成树森林是所有连通分支  （connected components）的生成树的集合。  
+
+解决任务调度类应用通常需要以下3步：  
+    指明任务和优先级条件  
+    不断检测并去除有向图中的所有环，以确保存在可行方案
+    使用拓扑排序解决调度问题
+  
+深度优先搜索（DepthFirstSearch）是这样一种算法：  
+    在访问一个顶点时，  
+        将它标记为已访问；  
+        递归地访问它的所有没有被标记过的相邻（adjacent）顶点。  
+        //代码TODO  
+
+他可以被用来：  
+    无向图  
+        寻找单源路径（single-source paths）//代码TODO   
+        寻找图中所有的连通分量//代码TODO  
+        检测环//代码TODO  
+        双色问题（Two-colorability）//代码TODO  
+    有向图  
+        单源可达性（Single-source reachability）//代码TODO  
+        单点有向路径（DepthFirstDirectedPaths）//代码TODO     
+        有向环检测（Directed cycle detection）//代码TODO
+        拓扑排序//代码TODO
+        Kosaraju算法//代码TODO
+
+广度优先搜索（BreadthFirstSearch）是这样一种算法：  
+    先将起点加入队列，然后重复下列步骤直到队列为空，  
+        取队列的下一个顶点v并标记它；  
+        将与v相邻的所有未被标记过的顶点加入队列。  
+        //代码TODO
+    
+他可以被用来：  
+    无向图  
+        寻找单源最短路径（single-source shortest paths）//代码TODO  
+        确定间隔的度数（Degrees of separation）//代码TODO，用符号图来实现  
+    有向图  
+        单点最短有向路径（BreadthFirstDirectedPaths）//代码TODO  
+
+
+
+
+
+
+
+
+
+
+
+  
