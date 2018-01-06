@@ -49,5 +49,3 @@ def max_subarray(A):
         max_so_far = max(max_so_far, max_ending_here)
     return max_so_far
 ```
-
-
