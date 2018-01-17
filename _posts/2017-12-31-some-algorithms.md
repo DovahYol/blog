@@ -49,3 +49,88 @@ def max_subarray(A):
         max_so_far = max(max_so_far, max_ending_here)
     return max_so_far
 ```
+
+### #4 最大生成树问题
+[灌溉](https://nanti.jisuanke.com/t/34)
+```cpp
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+
+struct node
+{
+    int u,v,cost;
+}p[10005];
+
+int pre[105];
+int fin(int x)
+{
+    if(x==pre[x])
+    {
+        return x;
+    }
+    else
+    {
+        return pre[x]=fin(pre[x]);
+    }
+}
+
+void join(int x,int y)
+{
+    int t1=fin(x);
+    int t2=fin(y);
+    if(t1!=t2)
+    {
+        pre[t1]=t2;
+    }
+}
+
+bool cmp(node a,node b)
+{
+    return a.cost<b.cost;
+}
+
+int main()
+{
+    int n;
+    while(~scanf("%d",&n))
+    {
+        for(int i=0;i<=n;i++)
+        {
+            pre[i]=i;
+        }
+        int num,sum=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                scanf("%d",&num);
+                if(i!=j)
+                {
+                    p[sum].u=i;
+                    p[sum].v=j;
+                    p[sum++].cost=num;
+                }
+            }
+        }
+        sort(p,p+sum,cmp);
+        int re=0,ss=0;
+        for(int i=0;i<sum;i++)
+        {
+            if(fin(p[i].u)!=fin(p[i].v))
+            {
+                join(p[i].u,p[i].v);
+                ss++;
+                re+=p[i].cost;
+            }
+            if(ss==n-1)
+            {
+                break;
+            }
+        }
+        printf("%d\n",re);
+    }
+    return 0;
+}
+```
