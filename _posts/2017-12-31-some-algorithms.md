@@ -134,3 +134,9 @@ int main()
     return 0;
 }
 ```
+
+### #5 四舍五入
+```cpp
+float a;
+a += 0.5;
+```
