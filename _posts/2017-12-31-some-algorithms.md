@@ -140,3 +140,27 @@ int main()
 float a;
 a += 0.5;
 ```
+
+### #6 错排公式
+> 错排问题，又称更列问题，是组合数学中的问题之一。这个问题有许多具体的版本，比如在写信时讲n封信装到n个不同的信封里，有多少种全部装错信封的情况？再比如n个人各写一张贺卡相互赠送，有多少种赠送方法？这些经典的题目都是典型的错排问题。
+
+> 首先，对于D(n)，有1~n这样n个元素错排，所以对于元素k，它现在可能的位置有(n-1)个，假设占了元素j的位置，则元素j所在的位置就有两种情况—第一种，它处在元素k位置以外，因为不能处于元素k位置，所以此时就可以将元素k的位置看成是元素j的位置，即D(n-1);第二种，它处在元素k位置，即D(n-2)。因此，对于D(n)都有D(n)=(n-1)*(D(n-1)+D(n-2))【特殊的，D(1)=0，D(2)=1】。
+
+### #7 int sqrt(int x)
+这在wiki上是一类问题，[Integer square root](https://en.wikipedia.org/wiki/Integer_square_root#Using_only_integer_division)。
+```cpp
+class Solution {
+public:
+    int mySqrt(int x) {
+        double p = x;
+        double a = (x + 1.0) / 2.0;
+        
+        while(abs(a - p) >= 1.0){
+            p = a;
+            a = (a + x/a) /2.0;
+        }
+        return (int)a;
+    }
+};
+```
+
