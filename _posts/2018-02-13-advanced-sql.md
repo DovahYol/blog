@@ -8,3 +8,7 @@ SELECT sid, name FROM student
 WHERE login LIKE '%@cs'
 LIMIT 20 OFFSET 10
 ```
+
+window function
+
+cte
